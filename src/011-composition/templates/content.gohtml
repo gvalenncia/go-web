@@ -7,10 +7,11 @@
             <ul>
                 {{range $index, $course := $student.Courses}}
                     <li>
-                        <h4>{{$course.Code}} - {{$course.Subject}}</h4>
+                        <h4>{{$course.Code}} - {{$course.Subject}} </h4>
                     </li>
                 {{end}}
             </ul>
+            <p>Average Grade: {{ag $student}}</p>
         {{end}}
     </ul>
 {{end}}

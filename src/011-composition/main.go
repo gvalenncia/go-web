@@ -12,6 +12,7 @@ var tpl *template.Template
 type course struct {
 	Code string
 	Subject string
+	Grade float64
 }
 
 type student struct{
@@ -25,8 +26,12 @@ type school struct {
 	Students []student
 }
 
+var fm = template.FuncMap{
+	"ag": averageGrade,
+}
+
 func init()  {
-	tpl = template.Must(template.ParseGlob("templates/*"))
+	tpl = template.Must(template.New("").Funcs(fm).ParseGlob("templates/*"))
 }
 
 func main ()  {
@@ -41,10 +46,12 @@ func main ()  {
 					{
 						Code: "C-001",
 						Subject: "Maths",
+						Grade: 4.5,
 					},
 					{
 						Code: "C-002",
 						Subject:"Arts",
+						Grade: 3.9,
 					},
 				},
 			},
@@ -55,6 +62,7 @@ func main ()  {
 					{
 						Code: "C-005",
 						Subject: "Social affairs",
+						Grade: 4.3,
 					},
 				},
 			},
@@ -64,4 +72,14 @@ func main ()  {
 	if err != nil {
 		log.Fatalln("There was a problem when executing index.gohtml", err)
 	}
+}
+
+func averageGrade (s student) float64 {
+	res := 0.0
+	div := len(s.Courses)
+	for _,course := range s.Courses {
+		res = res + course.Grade
+	}
+
+	return res/float64(div)
 }
