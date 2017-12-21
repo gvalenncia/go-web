@@ -1,0 +1,16 @@
+{{define "content-template"}}
+    {{$data := .}}
+    <h2>{{$data.Name}}</h2>
+    <ul>
+        {{range $index, $student := $data.Students}}
+            <li><h3>{{$student.Fname}} {{$student.Lname}}</h3></li>
+            <ul>
+                {{range $index, $course := $student.Courses}}
+                    <li>
+                        <h4>{{$course.Code}} - {{$course.Subject}}</h4>
+                    </li>
+                {{end}}
+            </ul>
+        {{end}}
+    </ul>
+{{end}}
