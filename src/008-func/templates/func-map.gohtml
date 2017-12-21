@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Template 1</title>
+</head>
+<body>
+<ul>
+    {{/*index is a predefined global function to access
+    slice elements in atemplate*/}}}
+{{index . 0}}
+{{index . 1}}
+
+{{range $key, $value := .}}
+    <li>{{uc $value}} - {{ft $value}}</li>
+    <li>{{t}}</li>
+{{end}}
+</ul>
+{{2 | fsqr}}
+{{2 | fsqr | fdbl}}
+</body>
+</html>

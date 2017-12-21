@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Template 1</title>
+</head>
+<body>
+<ul>
+    {{range $index, $person := .}}
+        <li>{{$person.Fname}} - {{$person.Lname}}</li>
+    {{end}}
+</ul>
+</body>
+</html>

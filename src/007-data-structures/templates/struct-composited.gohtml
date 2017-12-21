@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Template 1</title>
+</head>
+<body>
+{{$animal := .}}
+{{$persons := $animal.P}}
+{{$dogs := $animal.D}}
+<ul>
+{{range $i, $person := $persons}}
+    <li>{{$person.Fname}} - {{$person.Lname}}</li>
+{{end}}
+</ul>
+<ul>
+{{range $i, $dog := $dogs}}
+    <li>{{$dog.Race}}</li>
+{{end}}
+</ul>
+</body>
+</html>
