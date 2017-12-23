@@ -2,27 +2,26 @@ package main
 
 import (
 	"html/template"
-	"os"
 	"log"
+	"os"
 )
 
 var tpl *template.Template
 
-
 type course struct {
-	Code string
+	Code    string
 	Subject string
-	Grade float64
+	Grade   float64
 }
 
-type student struct{
-	Fname string
-	Lname string
+type student struct {
+	Fname   string
+	Lname   string
 	Courses []course
 }
 
 type school struct {
-	Name string
+	Name     string
 	Students []student
 }
 
@@ -30,11 +29,11 @@ var fm = template.FuncMap{
 	"ag": averageGrade,
 }
 
-func init()  {
+func init() {
 	tpl = template.Must(template.New("").Funcs(fm).ParseGlob("templates/*"))
 }
 
-func main ()  {
+func main() {
 
 	data := school{
 		Name: "inpahu",
@@ -44,14 +43,14 @@ func main ()  {
 				Lname: "Valencia",
 				Courses: []course{
 					{
-						Code: "C-001",
+						Code:    "C-001",
 						Subject: "Maths",
-						Grade: 4.5,
+						Grade:   4.5,
 					},
 					{
-						Code: "C-002",
-						Subject:"Arts",
-						Grade: 3.9,
+						Code:    "C-002",
+						Subject: "Arts",
+						Grade:   3.9,
 					},
 				},
 			},
@@ -60,9 +59,9 @@ func main ()  {
 				Lname: "Arias",
 				Courses: []course{
 					{
-						Code: "C-005",
+						Code:    "C-005",
 						Subject: "Social affairs",
-						Grade: 4.3,
+						Grade:   4.3,
 					},
 				},
 			},
@@ -74,12 +73,12 @@ func main ()  {
 	}
 }
 
-func averageGrade (s student) float64 {
+func averageGrade(s student) float64 {
 	res := 0.0
 	div := len(s.Courses)
-	for _,course := range s.Courses {
+	for _, course := range s.Courses {
 		res = res + course.Grade
 	}
 
-	return res/float64(div)
+	return res / float64(div)
 }

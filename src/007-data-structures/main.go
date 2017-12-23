@@ -71,7 +71,7 @@ func main() {
 	d2 := dog{
 		Race: "Pincher",
 	}
-	a :=  struct {
+	a := struct {
 		P []person
 		D []dog
 	}{

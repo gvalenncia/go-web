@@ -2,32 +2,32 @@ package main
 
 import (
 	"html/template"
-	"strings"
-	"os"
 	"log"
-	"time"
 	"math"
+	"os"
+	"strings"
+	"time"
 )
 
 var tpl *template.Template
 
 /*
-We can use template.FuncMap interface to define 
+We can use template.FuncMap interface to define
 the set of functions we want to use in templates
 */
 var fm = template.FuncMap{
-	"uc": strings.ToUpper,
-	"ft": firstThree,
-	"t": time.Now,
+	"uc":   strings.ToUpper,
+	"ft":   firstThree,
+	"t":    time.Now,
 	"fdbl": double,
 	"fsqr": square,
 }
 
-func init ()  {
+func init() {
 	tpl = template.Must(template.New("").Funcs(fm).ParseGlob("templates/*"))
 }
 
-func main ()  {
+func main() {
 	data := []string{
 		"German",
 		"Valencia",
@@ -39,15 +39,15 @@ func main ()  {
 	}
 }
 
-func firstThree(s string) string  {
+func firstThree(s string) string {
 	s = strings.TrimSpace(s)
 	return s[:3]
 }
 
-func square (x int) int  {
+func square(x int) int {
 	return x * x
 }
 
-func double (x int)  float64 {
+func double(x int) float64 {
 	return math.Pow(float64(x), 2)
 }
