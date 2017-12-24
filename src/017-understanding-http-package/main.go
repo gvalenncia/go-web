@@ -5,7 +5,8 @@ import (
 	"log"
 	"bufio"
 	"fmt"
-	"time"
+	"strings"
+	"os"
 )
 
 func main()  {
@@ -27,18 +28,21 @@ func main()  {
 }
 
 func handleConnection(conn net.Conn) {
-	//Killing the connection after 10 seconds
-	err := conn.SetDeadline(time.Now().Add(10 * time.Second))
-	if err != nil {
-		log.Fatalln("There was a problem when setting deadline")
-	}
+	defer conn.Close()
+
+	request(conn)
+
+}
+
+func request(conn net.Conn)  {
 
 	scanner := bufio.NewScanner(conn)
-	for scanner.Scan() {
+	for i := 0; scanner.Scan(); i++  {
 		ln := scanner.Text()
-		fmt.Println(ln)
-		//Over the connection, do write
-		fmt.Fprintf(conn, "Hi German, Do not call me more and go to shit")
+		fields := strings.Fields(ln)
+		if i == 0 {
+			fmt.Fprintln(os.Stdout, "Method: ", fields[0])
+			fmt.Fprintln(os.Stdout, "URL: ", fields[1])
+		}
 	}
-	defer conn.Close()
 }
