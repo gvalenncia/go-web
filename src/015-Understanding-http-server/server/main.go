@@ -1,14 +1,14 @@
 package main
 
 import (
-	"net"
-	"log"
 	"bufio"
 	"fmt"
+	"log"
+	"net"
 	"time"
 )
 
-func main()  {
+func main() {
 	li, err := net.Listen("tcp", ":8080")
 
 	if err != nil {
@@ -16,7 +16,7 @@ func main()  {
 	}
 	defer li.Close()
 
-	for{
+	for {
 		conn, err := li.Accept()
 		if err != nil {
 			log.Fatalln("There was a problem accepting connections", err)

@@ -1,26 +1,26 @@
 package main
 
 import (
-	"os"
-	"log"
 	"bufio"
 	"fmt"
-	"strings"
 	"html/template"
+	"log"
+	"os"
+	"strings"
 )
 
-type table struct{
+type table struct {
 	Date string
 	Open string
 }
 
 var tpl *template.Template
 
-func init ()  {
+func init() {
 	tpl = template.Must(template.ParseGlob("tpl.gohtml"))
 }
 
-func main ()  {
+func main() {
 
 	cvsFile := "table.csv"
 	file, err := os.Open(cvsFile)
@@ -34,7 +34,7 @@ func main ()  {
 	var tables []table
 
 	for i := 0; scanner.Scan(); i++ {
-		if i != 0{
+		if i != 0 {
 			eSlide := strings.Split(scanner.Text(), ",")
 			t := table{
 				Date: eSlide[0],

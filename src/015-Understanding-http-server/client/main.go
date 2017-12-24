@@ -1,12 +1,12 @@
 package main
 
 import (
-	"net"
-	"fmt"
 	"bufio"
+	"fmt"
+	"net"
 )
 
-func main()  {
+func main() {
 	conn, err := net.Dial("tcp", "localhost:8080")
 	if err != nil {
 		panic(err)
