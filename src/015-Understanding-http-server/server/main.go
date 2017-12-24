@@ -38,9 +38,7 @@ func handleConnection(conn net.Conn) {
 		ln := scanner.Text()
 		fmt.Println(ln)
 		//Over the connection, do write
-		fmt.Fprintf(conn, "(%s\n) ok, I got it.", ln)
+		fmt.Fprintf(conn, "Hi German, Do not call me more and go to shit")
 	}
 	defer conn.Close()
-
-	fmt.Println("po aca")
 }
