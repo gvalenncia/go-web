@@ -19,5 +19,4 @@ func main() {
 	if err != nil {
 		log.Fatalln("There was a problem when executing idex.gohtml", err)
 	}
-
 }

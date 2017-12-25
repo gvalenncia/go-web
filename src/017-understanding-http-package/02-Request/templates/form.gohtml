@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Template 1</title>
+</head>
+<body>
+    <ul>
+        {{range $key, $values := .}}
+            <li>{{$key}} - {{range $values}} {{.}}{{end}}</li>
+        {{end}}
+    </ul>
+
+    <form action="/?fname=James" method="POST">
+        First name:<br><input type="text" name="fname"><br>
+        First name:<br><input type="text" name="fname"><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
