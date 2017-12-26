@@ -1,4 +1,4 @@
-package _16_building_tcp_server
+package main
 
 import (
 	"bufio"
