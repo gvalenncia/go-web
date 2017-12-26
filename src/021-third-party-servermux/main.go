@@ -40,9 +40,10 @@ func contact(w http.ResponseWriter, req *http.Request, _ httprouter.Params)  {
 
 func sendMessage(w http.ResponseWriter, req *http.Request, ps httprouter.Params)  {
 	err := tpl.ExecuteTemplate(w, "contact.gohtml", nil)
-	fmt.Print(ps)
+	err = req.ParseForm()
 	handleError(w, err)
-}
+	fmt.Fprint(w, "<p>Message sent ok</p>")
+	}
 
 func handleError(w http.ResponseWriter, e error) {
 	if e != nil {
