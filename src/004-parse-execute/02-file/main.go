@@ -14,10 +14,10 @@ func main() {
 		log.Fatalln("there was a problem when parsing template: ", err)
 	}
 
-	nf, err := os.Create("index.html")
+	nf, err := os.Create("index.gohtml")
 
 	if err != nil {
-		log.Fatalln("There was a problem creating index.html", err)
+		log.Fatalln("There was a problem creating index.gohtml", err)
 	}
 
 	defer nf.Close()

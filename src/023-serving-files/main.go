@@ -15,7 +15,7 @@ func main ()  {
 	http.HandleFunc("/dog-file", dogFileHandler)
 	//Exposing a folder with all assets to serve
 	http.HandleFunc("/dog", dog)
-	http.Handle("/resources/", http.StripPrefix("/resources", http.FileServer(http.Dir("./assets"))))
+	http.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("./assets"))))
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -36,7 +36,7 @@ func dogFileHandler(w http.ResponseWriter, req *http.Request)  {
 
 func dog (w http.ResponseWriter, req *http.Request)  {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	io.WriteString(w, `<img src="/resources/dog.jpg">`)
+	io.WriteString(w, `<img src="/assets/dog.jpg">`)
 }
 func handleError(w http.ResponseWriter, err error) {
 	if err != nil {
