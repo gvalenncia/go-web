@@ -15,11 +15,12 @@ type person struct {
 }
 
 func init ()  {
-	tpl = template.Must(template.ParseFiles("person.gohtml"))
+	tpl = template.Must(template.ParseFiles("form.gohtml"))
 }
 
 func main () {
 	http.HandleFunc("/", index)
+	http.Handle("/favicon", http.NotFoundHandler())
 	http.ListenAndServe(":8080", nil)
 }
 
