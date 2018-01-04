@@ -47,14 +47,16 @@ func getUser(w http.ResponseWriter, req *http.Request) {
 
 	u := dbUsers[username]
 
-	tpl.ExecuteTemplate(w, "user.gohtml", u)
+	tpl.ExecuteTemplate(w, "bar.gohtml", u)
 }
 
 func index(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("creating a new session")
 
 	//Create a cookie if it does not exist
-	c, err := req.Cookie("sesssion")
+	c, err := req.Cookie("session")
 	if err != nil {
+		fmt.Println("creating a new session")
 		sID := uuid.NewV4()
 		c = &http.Cookie{
 			Name: "session",
