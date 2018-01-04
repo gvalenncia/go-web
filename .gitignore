@@ -1,4 +1,5 @@
 pkg/
+bin/
 .idea/
 .DS_Store
 github.com/
