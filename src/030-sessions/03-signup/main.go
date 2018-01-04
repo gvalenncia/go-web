@@ -6,12 +6,14 @@ import (
 	"log"
 	"github.com/satori/go.uuid"
 	"fmt"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var tpl *template.Template
 
 type user struct {
 	UserName string
+	Password []byte
 	First string
 	Last string
 }
@@ -63,14 +65,9 @@ func signup(w http.ResponseWriter, req *http.Request) {
 func submitSignup(w http.ResponseWriter, req *http.Request) {
 	if req.Method == http.MethodPost {
 		un := req.FormValue("username")
+		p := req.FormValue("password")
 		f := req.FormValue("first")
 		l := req.FormValue("last")
-
-		newu := user{
-			UserName: un,
-			First: f,
-			Last: l,
-		}
 
 		if _, ok := dbUsers[un]; ok {
 			log.Fatal("username already taken")
@@ -82,6 +79,19 @@ func submitSignup(w http.ResponseWriter, req *http.Request) {
 		c := &http.Cookie{
 			Name: "session",
 			Value: sessionID,
+		}
+
+		bs, err := bcrypt.GenerateFromPassword([]byte(p), bcrypt.MinCost)
+		if err != nil {
+			log.Fatal("There was an error encrypting the password")
+			http.Redirect(w,req, "There was a problem", http.StatusInternalServerError)
+		}
+
+		newu := user{
+			UserName: un,
+			Password: bs,
+			First: f,
+			Last: l,
 		}
 
 		dbSessions[sessionID] = un
