@@ -14,7 +14,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	scookie, err := r.Cookie("session")
 
 	if err != nil {
-		id := uuid.NewV4()
+		id := uuid.Must(uuid.NewV4())
 		scookie = &http.Cookie{
 			Name: "session",
 			Value: id.String(),

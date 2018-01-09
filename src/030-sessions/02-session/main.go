@@ -57,13 +57,15 @@ func index(w http.ResponseWriter, req *http.Request) {
 	c, err := req.Cookie("session")
 	if err != nil {
 		fmt.Println("creating a new session")
-		sID := uuid.NewV4()
+		sID := uuid.Must(uuid.NewV4())
 		c = &http.Cookie{
 			Name: "session",
 			Value: sID.String(),
 		}
 		http.SetCookie(w,c)
 	}
+
+	fmt.Println(c.Value)
 
 	if req.Method == http.MethodPost {
 		un := req.FormValue("username")
