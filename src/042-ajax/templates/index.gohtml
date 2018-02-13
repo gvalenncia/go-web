@@ -1,0 +1,26 @@
+<html>
+    <head>
+    </head>
+    <body>
+    <h1>Something happens</h1>
+    <script>
+        document.querySelector('h1').onclick = makeRequest;
+
+        function makeRequest(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/req', true);
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
+                    var b = document.querySelector('body');
+                    var ho = document.createElement('h2');
+                    var hotext = document.createTextNode(xhr.responseText);
+                    ho.appendChild(hotext);
+                    b.appendChild(ho);
+                    alert(xhr.responseText);
+                }
+            };
+            xhr.send();
+        }
+    </script>
+    </body>
+</html>
